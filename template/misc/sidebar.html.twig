@@ -1,0 +1,72 @@
+<!-- 
+SIDEBAR 
+Example gradients:
+    .aside-primary
+    .bg-gradient-default
+    .bg-gradient-purple
+    etc
+    * Footer should also match
+-->
+<aside id="aside-main" class="aside-start aside-primary font-weight-light aside-hide-xs d-flex flex-column h-auto">
+<!-- 
+LOGO 
+visibility : desktop only
+-->
+<div class="d-none d-sm-block">
+<div class="clearfix d-flex justify-content-between">
+    <!-- Logo : height: 60px max -->
+    <a class="w-100 align-self-center navbar-brand p-3" href="javascript:void(0);">
+        <img src="{{constant('ROOT')}}assets/images/logo/logo_light.png" alt="...">
+    </a>
+</div>
+</div>
+<!-- /LOGO -->
+<div class="aside-wrapper scrollable-vertical scrollable-styled-light align-self-baseline h-100 w-100">
+<!--
+    All parent open navs are closed on click!
+    To ignore this feature, add .js-ignore to .nav-deep
+    Links height (paddings):
+            .nav-deep-xs
+            .nav-deep-sm
+            .nav-deep-md  	(default, ununsed class)
+    .nav-deep-hover 	hover background slightly different
+    .nav-deep-bordered	bordered links
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    IMPORTANT NOTE:
+            Curently using ajax navigation!
+            remove .js-ajax class to have regular links!
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+<nav class="nav-deep nav-deep-dark nav-deep-hover fs--15 pb-5">
+<ul class="nav flex-column">
+<li class="nav-title">
+    <h6 class="fs--15 mb-1 text-white font-weight-normal"> Administrador</h6>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{constant('ROOT')}}administracion/articulos/?accion=escribir">
+<i class="fi fi-pencil"></i>
+Escribir Artículo
+</a>
+<li class="nav-item">
+<a class="nav-link" href="{{constant('ROOT')}}administracion/articulos/?accion=listar">
+<i class="fi fi-task-list"></i>
+Listar Artículos
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{constant('ROOT')}}administracion/articulos/?accion=ordenar">
+<i class="fi fi-eq-vertical"></i>
+Ordenar Artículos
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{{constant('ROOT')}}administracion?logout=true">
+<i class="fi fi-database"></i>
+Cerrar Sesión
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+<!-- /SIDEBAR -->

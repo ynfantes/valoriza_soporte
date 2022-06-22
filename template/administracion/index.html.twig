@@ -1,0 +1,155 @@
+{%extends "layout/admin.html.twig"%}
+{% block contenido %}
+<div id="middle" class="flex-fill">
+<!--
+PAGE TITLE
+-->
+<div class="page-title shadow-xs">
+<h1 class="h5 mt--10 mb--10 font-weight-normal">
+    {%if accion %}
+    Editar Artículo
+    {%else%}
+    Publicar Artículo
+    {%endif%}
+</h1>
+</div>
+<div class="col-12 col-xl-12 mb-3">
+    <section id="section_1">
+        <header class="d-flex b-0">
+        <h2 class="h5 text-truncate w-100">Escribir artículo</h2>
+        <div class="ui-options d-flex">
+            <!-- fullscreen -->
+            <a href="#" class="btn-toggle" 
+               data-toggle-container-class="fullscreen" 
+               data-toggle-body-class="overflow-hidden" 
+               data-target="#section_1">
+                <span class="group-icon">
+                    <i class="fi fi-expand"></i>
+                    <i class="fi fi-shrink"></i>
+                </span>
+            </a>
+        </div>
+        </header>
+        <form class="bs-validate js-ajax" novalidate="" 
+        method="post"
+        dataType="json"
+        action="{{constant('ROOT')}}administracion/articulos/?accion=guardar" 
+        data-modal-autoclose-on-success="true" 
+        data-modal-autoclose-on-success-delay="200" 
+        data-ajax-update-url="false" 
+        data-ajax-show-loading-icon="true"
+        data-error-toast-text="<i class='fi fi-circle-spin fi-spin float-start'></i> Complete los campos mínimos requeridos!" 
+        data-error-toast-delay="3000" 
+        data-error-toast-position="bottom-center" 
+        data-error-scroll-ignore="true" 
+        data-ajax-callback-function="resultado"
+        
+        >
+            <!-- 
+                hidden action, 
+                used by backend as identifier 
+            -->
+            <input type="hidden" name="id" value="{{articulo.id}}">
+            <!-- Content -->
+            <!-- Articulo: Titulo -->
+            <div required="" class="form-label-group mb-3 mt-3">
+                <input required name="titulo" placeholder="Título" type="text" value="{{articulo.titulo}}" class="form-control">
+                <label for="titulo">Título</label>
+            </div>
+
+            <!-- Articulo : Temas -->
+            <select 
+                required name="id_tema[]" 
+                class="form-control bs-select mb-3" 
+                data-actions-box="true" 
+                title="Tema"
+                multiple
+            >
+                {% for tema in temas %}
+                <option 
+                    data-icon="fi fi-bookmark float-start" 
+                    value="{{tema.id}}"
+                    {% for item in articulo.temas %}
+                    {%if item.id_tema == tema.id %} selected {%endif%}
+                    {% endfor %}
+                >{{tema.titulo}}</option>
+                {% endfor %}
+            </select>
+            
+            <!-- Artículo : Body -->
+            <div class="form-label-group mb-3">
+                <textarea name="contenido" 
+                    required class="form-control summernote-editor"
+                    data-placeholder="Ingrese aquí el texto..." 
+                    data-min-height="300" 
+                    data-max-height="1000" 
+                    data-focus="false" 
+                    data-lang="en-US"
+                    data-toolbar='[
+                        ["style", ["style"]],
+                        ["font", ["bold", "italic", "underline", "clear"]],
+                        ["fontsize", ["fontsize"]],
+                        ["fontname", ["fontname"]],
+                        ["color", ["color"]],
+                        ["para", ["ul", "ol", "paragraph"]],
+                        ["height", ["height"]],
+                        ["table", ["table"]],
+                        ["insert", ["link", "picture", "hr"]],
+                        ["view", ["fullscreen", "codeview"]],
+                        ["help", ["help"]]
+                        ]'
+                >{{articulo.contenido|raw}}</textarea>
+            </div>
+            
+            <!-- Articulo: Activo -->
+            <div required="" class="form-label-group mb-3 mt-3">
+                <label class="form-checkbox form-checkbox-primary d-block">
+                        <input type="checkbox" name="inactivo" value="1" {%if articulo.inactivo %}checked{%endif%}>
+                        <i></i> Inactivar artículo
+                </label>
+                <span class="d-block fs--14 text-muted font-weight-normal">
+                        Marque esta opción para no publicar este artículo
+                </span>
+            </div>
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="fi fi-check"></i> 
+                    Guardar
+                </button>
+                <!--button type="button" class="btn btn-sm btn-pill btn-light" data-dismiss="modal">
+                    <i class="fi fi-close"></i> 
+                    Cancelar
+                </button-->
+            </div>
+        </form>
+        <div id="alert_success" class="alert alert-success hide-force">
+        Thank you! Data Sumbmited!
+        </div>
+        <div id="alert_error" class="alert alert-danger hide-force">
+        Please, review your data and try again!
+        </div>
+    </section>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+{{parent()}}
+<script type="text/javascript">
+resultado = function(e,data) {
+    var o = jQuery.parseJSON(data);
+    if (o.suceed){
+        $.SOW.core.toast.show('success', 'Soporte v2', o.mensaje, 'bottom-center', 0, true);
+        /*$('#alert_success').removeClass('hide-force').html(o.mensaje);
+        $('#alert_error').addClass('hide-force');*/
+        if ($('input[name="id"').val()==='') {
+            $('input[name="id"').val(o.insert_id);
+        }
+    } else {
+        $.SOW.core.toast.show('danger', 'Soporte v2', o.mensaje, 'bottom-center', 0, true);
+        /*$('#alert_error').removeClass('hide-force').html(o.mensaje);
+        $('#alert_success').addClass('hide-force');*/
+    }
+}
+</script>
+{% endblock %}

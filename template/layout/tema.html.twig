@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="es"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="es"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="e"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="not-ie" lang="es"> <!--<![endif]-->
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% if articulo %}{{articulo.titulo}}{%else%}Ayuda de Valoriza2{%endif%}</title>
+<meta charset="utf-8">
+<meta name="description" content="{{articulo.contenido|striptags|replace({'&nbsp;':' '})|slice(0,120)}}...">
+<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<!-- up to 10% speed up for external res -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<!-- preloading icon font is helping to speed up a little bit -->
+<link rel="preload" href="{{constant('ROOT')}}assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{constant('ROOT')}}assets/css/core.min.css">
+<link rel="stylesheet" href="{{constant('ROOT')}}assets/css/vendor_bundle.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+<!-- favicon -->
+<link rel="shortcut icon" href="{{constant('ROOT')}}favicon.png">
+<!--link rel="apple-touch-icon" href="{{constant('ROOT')}}assets/images/iconos/icon_512x512.png">
+<link rel="manifest" href="{{constant('ROOT')}}manifest.json"-->
+<meta name="theme-color" content="#377dff">
+<style type="text/css">
+@media print {
+    .side-container {
+        display: none
+    }
+    footer {
+        display: none
+    }
+    .tooltip {
+        display: none
+    }
+    article p, article li {
+        padding-right: 2rem;
+        /*height: auto;*/
+        /*word-wrap: break-word;*/
+    }
+}
+@page 
+{
+    size:  auto;   /* auto es el valor inicial */
+    margin: 0mm;  /* afecta el margen en la configuración de impresión */
+}
+</style>
+</head>
+<body class="header-over bg-light">
+<div id="wrapper">
+<!-- HEADER -->
+<header id="header" class="shadow-xs">
+<!-- NAVBAR -->
+<div class="container position-relative">
+<div class="col-lg-10 offset-lg-1">
+<nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit h--70">
+<div class="align-items-start">
+<!-- 
+        Logo : height: 70px max
+-->
+<a class="navbar-brand" href="index.html">
+    <img src="{{constant('ROOT')}}assets/images/logo/logo_light.png" alt="Soporte Valoriza2">
+</a>
+</div>
+<!-- OPTIONS -->
+<ul class="list-inline list-unstyled mb-0 d-flex align-items-end">
+<li class="list-inline-item mx-1 dropdown">
+    <a href="{{constant('ROOT')}}" aria-label="website search" class="fs--14 text-white clearfix">
+    <svg class="mx-1" width="14" height="14" viewBox="0 0 14 14"><path stroke="#FFF" fill="none" d="M11.5 6.73v6.77h-11v-11h7.615m-3.615 7l7-7m2 3v-5h-5"/></svg> 
+    Inicio
+    </a>
+</li>
+</ul>
+<!-- /OPTIONS -->
+</nav>
+</div>
+</div>
+<!-- /NAVBAR -->
+</header>
+<!-- /HEADER -->
+<!-- PAGE SEARCH -->
+<section class="bg-gradient-primary text-white pb-5">
+<div class="container">
+<div class="col-lg-10 offset-lg-1">
+<!-- 
+[SOW] SEARCH SUGGEST PLUGIN
+++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++
+PLEASE READ DOCUMENTATION
+documentation/plugins-sow-search-suggest.html
+++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++
+-->
+<form action="{{constant('ROOT')}}buscar/" 
+method="GET" 
+data-autosuggest="on" 
+data-mode="json" 
+data-json-max-results='10'
+data-json-related-title='Ayuda Valoriza2'
+data-json-related-item-icon='fi fi-star-empty'
+data-json-suggest-title='Sugerencias para ti'
+data-json-suggest-noresult='No hay coincidencias para'
+data-json-suggest-item-icon='fi fi-search'
+data-json-suggest-min-score='5'
+data-json-highlight-term='true'
+data-contentType='application/json; charset=utf-8'
+data-dataType='json'
+
+data-container="#sow-search-container" 
+data-input-min-length="2" 
+data-input-delay="250" 
+data-related-keywords="" 
+data-related-url="{{constant('ROOT')}}buscar/" 
+data-suggest-url="{{constant('ROOT')}}buscar/" 
+data-related-action="related_get" 
+data-suggest-action="suggest_get" 
+class="js-ajax-search sow-search d-block">
+<div class="sow-search-input w-100">
+<!-- rounded: form-control-pill -->
+<div class="input-group-over d-flex align-items-center w-100 h-100 rounded">
+    <input placeholder="¿En qué puedo ayudarle?" 
+           aria-label="¿En qué puedo ayudarle?" 
+           name="s" 
+           type="text" 
+           class="form-control-sow-search form-control form-control-lg form-control-custom b-0 text-white bg-diff" 
+           value="" 
+           autocomplete="off"
+           required 
+    >
+    <span class="sow-search-buttons">
+    <!-- search button -->
+    <button aria-label="Búsqueda Global" type="submit" class="btn shadow-none m-0 px-3 py-2 bg-transparent text-white">
+    <i class="fi fi-search fs--20 m-0"></i>
+    </button>
+    </span>
+</div>
+</div>
+<!-- search suggestion container -->
+<div class="sow-search-container w-100 p-0 hide shadow-md" id="sow-search-container">
+<div class="sow-search-container-wrapper">
+<!-- main search container -->
+<div class="sow-search-loader p-3 text-center hide">
+<i class="fi fi-circle-spin fi-spin text-muted fs--30"></i>
+</div>
+<!-- 
+AJAX CONTENT CONTAINER 
+SHOULD ALWAYS BE AS IT IS : NO COMMENTS OR EVEN SPACES!
+-->
+<div class="sow-search-content rounded w-100 scrollable-vertical"></div>
+</div>
+</div>
+<!-- /search suggestion container -->
+
+<!-- 
+overlay combinations:
+        overlay-dark opacity-* [1-9]
+        overlay-light opacity-* [1-9]
+-->
+<div class="sow-search-backdrop overlay-dark opacity-3 hide"></div>
+</form>
+<!-- /SEARCH -->
+</div>
+</div>
+<!-- svg shape -->
+<svg class="absolute-full z-index-0" width="100%" height="100%" viewBox="0 0 1920 90" preserveAspectRatio="none">
+<path fill="rgba(0,0,0,0.03)" d="M1920,0C1217,0,120.574,155.567,0,0v90h1920V0z"></path>
+</svg>
+
+</section>
+<!-- /PAGE SEARCH -->
+{% block contenido %}
+
+{% endblock %}
+<!-- Footer -->
+{% include 'misc/pie.html.twig'%}
+<!-- /Footer -->
+</div><!-- /#wrapper -->
+
+</body>
+{% block js %}
+<script src="{{constant('ROOT')}}assets/js/core.min.js"></script>
+<!--script src="{{constant('ROOT')}}assets/js/sow.clipboard.js"></script-->
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('a.d-inline-block').on('click', function() {
+       $(this).tooltip('hide');
+    });
+    $('#imprimir').on('click', function() {
+        //var printContents = $('article').html();
+        //w = window.open();
+        //w.document.write(printContents);
+        //w.document.close(); // necessary for IE >= 10
+        //w.focus(); // necessary for IE >= 10
+	window.print();
+	//w.close();
+        return true;
+    });
+    //$.SOW.core.clipboard.init('.btn-clipboard');
+    $('.btn-clipboard').on('click', function() {
+        var aux = document.createElement("textarea");
+        var elem = document.getElementsByTagName("article");
+        aux.value = elem[0].innerText;
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+        $.SOW.core.toast.show(
+                'success', 
+                'Copiado con éxito', 
+                'Articulo copiado al portapapeles', 
+                'top-center', 3000, );
+        console.log(elem[0].innerText);
+    });
+});
+</script>
+{% endblock %}
+</html>

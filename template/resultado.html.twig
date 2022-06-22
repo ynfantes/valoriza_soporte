@@ -1,0 +1,24 @@
+{% extends "layout/tema.html.twig"%}
+{% block contenido %}
+<section class="py-4 mb-5">
+<div class="container">
+<div class="row">
+<h2 class="h5 mb-4 font-weight-normal">
+{{listado|length}} resultado(s) para <i class="font-weight-light">{{s}}</i>
+</h2>
+{% if listado %}
+<div class="col-12 col-lg-10 offset-lg-1">
+{% for item in listado%}
+    <div class="shadow-xs shadow-primary-xs-hover px-4 py-3 mb-4">
+    <h5>
+    <a href="{{constant('ROOT')}}?topic={{item.topic}}&item={{item.id}}" class="text-dark">{{item.titulo}}</a>
+    </h5>
+    <small class="d-block">Actualizado el: {{format_date(item.fecha)}} / <b>Visto {{item.visto}} veces</b></small>
+    </div>
+{%endfor%}
+</div>
+{%endif%}
+</div>
+</div>
+</section>
+{% endblock %}

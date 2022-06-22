@@ -1,0 +1,169 @@
+{%extends "layout/admin.html.twig"%}
+{% block contenido %}
+<div id="middle" class="flex-fill">
+<!--
+PAGE TITLE
+-->
+<div class="page-title shadow-xs">
+<h1 class="h5 mt--10 mb--10 font-weight-normal">
+    Orden Artículos
+</h1>
+</div>
+<div class="col-12 col-xl-12 mb-3">
+    <section id="section_1">
+        <header class="d-flex b-0">
+            <h2 class="h5 text-truncate w-100">
+            </h2>
+        <div class="ui-options d-flex">
+            <!-- fullscreen -->
+            <a href="#" class="btn-toggle" 
+               data-toggle-container-class="fullscreen" 
+               data-toggle-body-class="overflow-hidden" 
+               data-target="#section_1">
+                <span class="group-icon">
+                    <i class="fi fi-expand"></i>
+                    <i class="fi fi-shrink"></i>
+                </span>
+            </a>
+        </div>
+        </header>
+        <div class="mt--30 mb--60">
+            <form name="ordenar" action="{{constant('ROOT')}}administracion/articulos/" method="GET">
+            <input type="hidden" name="accion" value="ordenar">
+            <label>Categorías / Temas</label>
+            <select 
+                required name="id" 
+                class="form-control bs-select mb-3" 
+                data-actions-box="true" 
+                title="Tema"
+            >
+                {% for tema in temas %}
+                <option 
+                    data-icon="fi fi-bookmark float-start" 
+                    value="{{tema.id}}"
+                    {%if tema.id == selec %} selected {%endif%}
+                >{{tema.titulo}}</option>
+                {% endfor %}
+            </select>
+            </form>
+            <!--
+                data-autofill="false|hover|click" 
+                data-enable-paging="true" 			false = show all, no pagination
+                data-items-per-page="10|15|30|50|100" 
+                data-select-onclick="true"
+                data-custom="true"
+            -->
+            <form name="articulos" method="POST">
+                <input type="hidden" name="id_tema" value="{{selec}}">
+                <input type="hidden" name="accion" value="actualizar">
+                <table class="table-datatable table table-bordered table-hover table-striped js-datatableified" 
+                id="lista_articulos"
+                data-lng-empty="No data available in table" 
+                data-lng-page-info="Mostrando del _START_ al _END_ de _TOTAL_ artículos" 
+                data-lng-filtered="(filtered from _MAX_ total entries)" 
+                data-lng-loading="Cargando..." 
+                data-lng-processing="Procesando..." 
+                data-lng-search="Buscar..." 
+                data-lng-norecords="No se encontraron registros" 
+                data-lng-sort-ascending=": activate to sort column ascending" 
+                data-lng-sort-descending=": activate to sort column descending" 
+
+                data-lng-column-visibility="Ocultar Columnas" 
+                data-lng-csv="CSV" 
+                data-lng-pdf="PDF" 
+                data-lng-xls="XLS" 
+                data-lng-copy="Copy" 
+                data-lng-print="Print" 
+                data-lng-all="All" 
+                data-column-visibility="off"
+                data-main-search="false" 
+                data-column-search="false" 
+                data-row-reorder="false" 
+                data-col-reorder="true" 
+                data-responsive="true" 
+                data-header-fixed="true"    
+                data-enable-paging="false" 
+                data-enable-col-sorting="true" 
+                data-autofill="false" 
+                data-group="false" 
+                data-items-per-page="10" 
+
+                data-lng-export="<i class='fi fi-squared-dots fs--18 line-height-1'></i>" 
+                dara-export-pdf-disable-mobile="true" 
+                data-export='["csv", "pdf", "xls"]' 
+                data-options='["copy", "print"]'
+            >
+                    <thead>
+                        <tr>
+                            <th>Titulo Artículo</th>
+                            <th style="width:60px">Orden</th>
+                            <th>Estatus</th>
+                            <th>Fecha</th>
+                            <th>Fun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if lista %}
+                        {%for item in lista %}
+                        <tr>
+                            <td>
+                                <a href="#"
+                                class="js-ajax-modal"
+                                data-href="{{constant('ROOT')}}administracion/articulos/?accion=leer&id={{item.id}}" 
+                                data-ajax-modal-container="#my_custom"
+                                data-ajax-modal-size="" 
+                                data-ajax-modal-centered="true" 
+                                data-ajax-modal-callback-function="">
+                                {{item.titulo}}
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <input type="hidden" name="id[]" value="{{item.id}}"/>
+                                <input type="number" name="orden[]" class="form-control" value="{{item.orden}}" style="padding: 0 1rem; height:auto;width:60px" />
+                            </td>
+                            <td class="text-center">
+                                
+                                <a href="#" class="text-{% if item.inactivo %}danger{% else %}success{% endif%} btn btn-sm p-0">
+                                    {% if item.inactivo %}
+                                        Inactivo
+                                    {% else %}
+                                        Activo
+                                    {%endif%}
+                                </a>
+                            </td>
+                            <td>{{format_date(item.fecha)}}</td>
+                            <td class="text-center">
+                                <a class="text-secondary" href="{{constant('ROOT')}}administracion/articulos/?accion=editar&id={{item.id}}">
+                                <i class="fi fi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+            </table>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fi fi-check"></i> 
+                Actualizar
+                </button>
+                </div>
+            </form>                   
+        <div id="event_log"><!-- LOG ITEM/EVENT CLICK (keytable) --></div>
+
+        </div>
+    </section>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+{{parent()}}
+<script src="{{constant('ROOT')}}assets/js/sow.clipboard.js"></script>
+<!--script src="{#{constant('ROOT')}#}assets/js/jquery.dataTables.js"></script-->
+<script>
+$.SOW.core.clipboard.init('#middle a.btn-clipboard');
+$("select[name|='id']").change(function() {
+    $('form[name="ordenar"').submit();
+});
+</script>
+{% endblock %}

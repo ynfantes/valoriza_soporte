@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7 ]><html class="ie ie6" lang="es"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="es"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="e"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="not-ie" lang="es"> <!--<![endif]-->
+<head>
+<title>Adminsitracion Ayuda Valoriza2</title>
+<meta charset="UTF-8">
+<meta name="description" content="...">
+<meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+<!-- up to 10% speed up for external res -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<!-- preloading icon font is helping to speed up a little bit -->
+<link rel="preload" href="{{constant('ROOT')}}assets/fonts/flaticon/Flaticon.woff2" as="font" type="font/woff2" crossorigin>
+<!-- non block rendering : page speed : js = polyfill for old browsers missing `preload` -->
+<link rel="stylesheet" href="{{constant('ROOT')}}assets/css/core.min.css">
+<link rel="stylesheet" href="{{constant('ROOT')}}assets/css/vendor_bundle.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+<!-- favicon -->
+<link rel="shortcut icon" href="{{constant('ROOT')}}favicon.ico">
+<link rel="apple-touch-icon" href="{{constant('ROOT')}}demo.files/logo/icon_512x512.png">
+<link rel="manifest" href="{{constant('ROOT')}}assets/images/manifest/manifest.json">
+<meta name="theme-color" content="#377dff">
+</head>
+<body>
+<!--script>
+function statusChangeCallback(response)
+    {
+        console.log('statusChangeCallback');
+        console.log(response);
+
+        if (response.status === 'connected')
+        {
+            testAPI();
+        }
+        else if (response.status === 'not_authorized')
+        {
+            document.getElementById('status').innerHTML = 'Inicia sesión';
+        }
+        else
+        {
+        document.getElementById('status').innerHTML = 'Inicia sesión';
+        }
+    }
+
+    function checkLoginState()
+    {
+        FB.getLoginStatus(function(response){
+            statusChangeCallback(response);
+        });
+    }
+
+    window.fbAsyncInit = function()
+    {
+        FB.init({
+            appId      : '242011383598796',
+            cookie     : true,  // enable cookies to allow the server to access 
+            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v6.0' // use version 2.5
+        });
+    };
+
+    function login_fb()
+    {
+        FB.login(function(response){  
+            validarUsuario();  
+        }, {scope: 'public_profile, email'});  
+    }
+
+    function validarUsuario()
+    {  
+        FB.getLoginStatus(function(response) {  
+            if(response.status == 'connected') {
+                testAPI();
+            } else if(response.status == 'not_authorized') {  
+                alert('Debes autorizar la app!');  
+            } else {  
+                alert('Debes ingresar a tu cuenta de Facebook!');  
+            }  
+        });  
+    }
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_ES/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    function testAPI() {
+        console.log('Bienvenido ');
+        FB.api('/me?fields=name,email,first_name,last_name,picture', function(response) {
+            //location.href="http://www.google.com";
+            console.log(response);
+        });
+    }
+</script-->
+<div id="wrapper">
+<!-- light logo -->
+<a aria-label="go back" href="{{constant('ROOT')}}administracion" class="position-absolute top-0 start-0 my-2 mx-4 z-index-3 h--70 d-inline-flex align-items-center">
+<img src="{{constant('ROOT')}}assets/images/logo/logo_light.png" width="110" alt="...">
+</a>
+<div class="d-lg-flex min-h-100vh bg-gradient-default">
+<div class="col-12 col-lg-5 d-lg-flex">
+<div class="w-100 align-self-center">
+<div class="py-7">
+<h1 class="d-inline-block text-align-end text-center-md text-white text-center-xs display-4 h2-xs w-100 max-w-600 w-100-md w-100-xs">
+Intranet
+<span class="display-3 h1-xs d-block font-weight-medium">
+Soporte v2
+</span>
+</h1>
+</div>
+</div>
+</div>
+<div class="col-12 col-lg-7 d-lg-flex">
+<div class="w-100 align-self-center text-center-md text-center-xs py-2">
+<!-- optional class: .form-control-pill -->
+<form novalidate action="{{constant('ROOT')}}administracion/" method="POST" class="bs-validate p-5 py-6 rounded d-inline-block bg-white text-dark w-100 max-w-600">
+<!--
+<p class="text-danger">
+Ups! Please check again
+</p>
+-->
+<div class="form-label-group mb-3">
+<input required placeholder="Email" id="email" name="email" type="email" class="form-control">
+<label for="email">Email</label>
+</div>
+<div class="input-group-over">
+<div class="form-label-group mb-3">
+<input required placeholder="Password" id="password" name="password" type="password" class="form-control">
+<label for="password">Password</label>
+</div>
+<a href="account-signin-password.html" class="btn fs--12">
+LA OLVIDE
+</a>
+</div>
+<button type="submit" class="btn btn-primary btn-block transition-hover-top">
+Inciar Sesión
+</button>
+<div class="col-12 text-center mt-3">
+<p>o inicie sesión con</p>
+</div>
+<!--a href="javascript:login_fb();" 
+   class="btn btn-sm btn-block bg-facebook transition-hover-top mt-1 text-white" 
+   rel="noopener">
+    <i class="fi fi-social-facebook"></i>
+Facebook
+</a-->
+<div class="row">
+    <div class="col-6">
+<a href="https://www.facebook.com/v6.0/dialog/oauth?client_id=242011383598796&redirect_uri={{url}}&state={{state}}&scope=email,public_profile" 
+   class="btn btn-sm btn-block bg-facebook transition-hover-top mt-1 text-white" 
+   rel="noopener">
+    <i class="fi fi-social-facebook"></i>
+Facebook
+</a>
+    </div>
+   <div class="col-6">
+       <a href="{{loginUrl}}" class="btn btn-sm btn-block bg-googleplay transition-hover-top mt-1 text-white" rel="noopener">
+<i>G</i>
+Google
+</a>
+   </div>
+</div>
+</form>
+{% if mensaje %}
+<div class="alert alert-danger text-dark p-3 my-2 b-0 rounded d-inline-block w-100 max-w-600">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span class="fi fi-close" aria-hidden="true"></span>
+</button>
+{{ mensaje }}
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</div><!-- /#wrapper -->
+<script src="{{constant('ROOT')}}assets/js/core.min.js"></script>
+<script src="{{constant('ROOT')}}assets/js/vendor_bundle.min.js"></script>
+</body>
+</html>
