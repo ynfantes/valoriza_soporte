@@ -1,6 +1,6 @@
 const STATIC_CACHE_NAME     = 'static-v2.4';
 const INMUTABLE_CACHE_NAME  = 'inmutable-v2.3';
-const DYNAMIC_CACHE_NAME    = 'dynamic-v2.3';
+const DYNAMIC_CACHE_NAME    = 'dynamic-v2.4';
 
 const APP_SHELL = [
     'index.php',
